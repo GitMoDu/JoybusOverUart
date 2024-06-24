@@ -48,6 +48,8 @@ private:
 
 	static constexpr uint32_t DisconnectFlashDuration = 250000;
 
+	using ButtonsEnum = GameCubeController::ButtonsEnum;
+
 private:
 	RgbColor Color{};
 
@@ -61,8 +63,6 @@ private:
 	BrightnessEffect<DPadCenterBitmapSprite> DPadCenterSprite{};
 	BrightnessEffect<SingleColorShader<ButtonZBitmaskSprite>> ButtonZSprite{};
 
-	//BrightnessEffect<SingleColorShader<ShoulderLBitmaskSprite>> ShoulderLSprite{};
-	//SingleColorShader<JoystickNeckBitmaskSprite> JoystickNeckSprite{};
 	BrightnessEffect<TransparentColorEffect<JoystickBitmapSprite>> JoystickSprite{};
 	BrightnessEffect<TransparentColorEffect<JoyCBitmapSprite>> JoyCSprite{};
 	TransparentColorEffect<IconBitmapSprite> IconSprite{};
@@ -270,18 +270,21 @@ public:
 		case (uint8_t)DrawElementsEnum::ShoulderL:
 			if (State.Connected)
 			{
-				if (State.Button<ButtonsEnum::L>())
+				if (State.Button<ButtonsEnum::L1>())
 				{
-					Color.FromRGB32(Pallete::WhitePadRGB);
-					Frame->Rectangle(Color, Layout::GetLX(), Layout::GetLRY(), Layout::GetLX() + Layout::GetLRWidth(), Layout::GetLRY() + Layout::GetLRHeight());
-					Frame->RectangleFill(Color, Layout::GetLX() + 1, Layout::GetLRY() + 1, Layout::GetLX() + 1 + Layout::GetLRWidth(UINT8_MAX), Layout::GetLRY() + Layout::GetLRInnerHeight());
+					if (drawState->FrameCounter % 2 == 0)
+					{
+						Color.FromRGB32(Pallete::WhitePadRGB);
+						Frame->Rectangle(Color, Layout::GetLX(), Layout::GetLRY(), Layout::GetLX() + Layout::GetLRWidth(), Layout::GetLRY() + Layout::GetLRHeight());
+						Frame->RectangleFill(Color, Layout::GetLX() + 1, Layout::GetLRY() + 1, Layout::GetLX() + 1 + Layout::GetLRWidth(UINT8_MAX), Layout::GetLRY() + Layout::GetLRInnerHeight());
+					}
 				}
 				else
 				{
 					Color.FromRGB32(Pallete::GrayPadRGB);
 					Frame->Rectangle(Color, Layout::GetLX(), Layout::GetLRY(), Layout::GetLX() + Layout::GetLRWidth(), Layout::GetLRY() + Layout::GetLRHeight());
 					Color.FromRGB32(Pallete::WhitePadRGB);
-					Frame->RectangleFill(Color, Layout::GetLX() + 1, Layout::GetLRY() + 1, Layout::GetLX() + 1 + Layout::GetLRWidth(State.SliderLeft), Layout::GetLRY() + Layout::GetLRInnerHeight());
+					Frame->RectangleFill(Color, Layout::GetLX() + 1, Layout::GetLRY() + 1, Layout::GetLX() + 1 + Layout::GetLRWidth(State.L2), Layout::GetLRY() + Layout::GetLRInnerHeight());
 				}
 			}
 			else
@@ -293,18 +296,21 @@ public:
 		case (uint8_t)DrawElementsEnum::ShoulderR:
 			if (State.Connected)
 			{
-				if (State.Button<ButtonsEnum::R>())
+				if (State.Button<ButtonsEnum::R1>())
 				{
-					Color.FromRGB32(Pallete::WhitePadRGB);
-					Frame->Rectangle(Color, Layout::GetRX(), Layout::GetLRY(), Layout::GetRX() + Layout::GetLRWidth(), Layout::GetLRY() + Layout::GetLRHeight());
-					Frame->RectangleFill(Color, Layout::GetRX() + 1, Layout::GetLRY() + 1, Layout::GetRX() + 1 + Layout::GetLRWidth(UINT8_MAX), Layout::GetLRY() + Layout::GetLRInnerHeight());
+					if (drawState->FrameCounter % 2 == 0)
+					{
+						Color.FromRGB32(Pallete::WhitePadRGB);
+						Frame->Rectangle(Color, Layout::GetRX(), Layout::GetLRY(), Layout::GetRX() + Layout::GetLRWidth(), Layout::GetLRY() + Layout::GetLRHeight());
+						Frame->RectangleFill(Color, Layout::GetRX() + 1, Layout::GetLRY() + 1, Layout::GetRX() + 1 + Layout::GetLRWidth(UINT8_MAX), Layout::GetLRY() + Layout::GetLRInnerHeight());
+					}
 				}
 				else
 				{
 					Color.FromRGB32(Pallete::GrayPadRGB);
 					Frame->Rectangle(Color, Layout::GetRX(), Layout::GetLRY(), Layout::GetRX() + Layout::GetLRWidth(), Layout::GetLRY() + Layout::GetLRHeight());
 					Color.FromRGB32(Pallete::WhitePadRGB);
-					Frame->RectangleFill(Color, Layout::GetRX() +Layout::GetLRWidth(UINT8_MAX) - Layout::GetLRWidth(State.SliderRight), Layout::GetLRY() + 1, Layout::GetRX() + Layout::GetLRWidth(UINT8_MAX), Layout::GetLRY() + Layout::GetLRInnerHeight());
+					Frame->RectangleFill(Color, Layout::GetRX() + Layout::GetLRWidth(UINT8_MAX) - Layout::GetLRWidth(State.R2), Layout::GetLRY() + 1, Layout::GetRX() + Layout::GetLRWidth(UINT8_MAX), Layout::GetLRY() + Layout::GetLRInnerHeight());
 				}
 			}
 			else

@@ -44,6 +44,8 @@ private:
 
 	static constexpr uint32_t DisconnectFlashDuration = 250000;
 
+	using ButtonsEnum = Nintendo64Controller::ButtonsEnum;
+
 private:
 	BrightnessEffect<TransparentColorEffect<ButtonABitmapSprite>> ButtonASprite{};
 	BrightnessEffect<TransparentColorEffect<ButtonBBitmapSprite>> ButtonBSprite{};
