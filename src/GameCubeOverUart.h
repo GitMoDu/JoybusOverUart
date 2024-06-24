@@ -7,12 +7,13 @@
 #include "JoybusUart/JoybusReceiveBuffer.h"
 #include "JoybusUart/JoybusUart.h"
 
-using namespace GameCubeController;
-
-class GameCubeOverUart : public JoybusUart<JoybusReceiveBuffer<(uint8_t)ResponseSize::PollSize>>
+class GameCubeOverUart : public JoybusUart<JoybusReceiveBuffer<(uint8_t)GameCubeController::ResponseSize::PollSize>>
 {
 private:
-	using BaseClass = JoybusUart<JoybusReceiveBuffer<(uint8_t)ResponseSize::PollSize>>;
+	using BaseClass = JoybusUart<JoybusReceiveBuffer<(uint8_t)GameCubeController::ResponseSize::PollSize>>;
+	using CommandCode = GameCubeController::CommandCode;
+	using ResponseSize = GameCubeController::ResponseSize;
+	using PollCodeEnum = GameCubeController::PollCodeEnum;
 
 private:
 	CommandCode LastCommandSent = CommandCode::NoCommandCode;
@@ -44,7 +45,7 @@ public:
 	/// Can be called after ~1 ms of poll, if low latency is desired.
 	/// </summary>
 	/// <returns>True when a response was found.</returns>
-	const bool ReadControllerData(data_t& controllerData, const uint8_t maxReadTries = 50)
+	const bool ReadControllerData(GameCubeController::data_t& controllerData, const uint8_t maxReadTries = 50)
 	{
 		if (GetResponse(maxReadTries))
 		{
@@ -55,7 +56,7 @@ public:
 	}
 
 private:
-	const bool ProcessResponse(data_t& controllerData)
+	const bool ProcessResponse(GameCubeController::data_t& controllerData)
 	{
 		// Validate for size based on expected response.
 		switch (LastCommandSent)
@@ -89,8 +90,8 @@ private:
 					controllerData.JoystickY = ReceiveBuffer[3] - INT8_MAX;
 					controllerData.JoystickCX = ReceiveBuffer[4] - INT8_MAX;
 					controllerData.JoystickCY = ReceiveBuffer[5] - INT8_MAX;
-					controllerData.SliderLeft = ReceiveBuffer[6];
-					controllerData.SliderRight = ReceiveBuffer[7];
+					controllerData.L2 = ReceiveBuffer[6];
+					controllerData.R2 = ReceiveBuffer[7];
 				}
 
 				BufferDiscard();

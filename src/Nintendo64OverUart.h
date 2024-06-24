@@ -7,12 +7,15 @@
 #include "JoybusUart/JoybusReceiveBuffer.h"
 #include "JoybusUart/JoybusUart.h"
 
-using namespace Nintendo64Controller;
+//using namespace Nintendo64Controller;
 
-class Nintendo64OverUart : public JoybusUart<JoybusReceiveBuffer<(uint8_t)ResponseSize::PollSize>>
+class Nintendo64OverUart : public JoybusUart<JoybusReceiveBuffer<(uint8_t)Nintendo64Controller::ResponseSize::PollSize>>
 {
 private:
-	using BaseClass = JoybusUart<JoybusReceiveBuffer<(uint8_t)ResponseSize::PollSize>>;
+	using BaseClass = JoybusUart<JoybusReceiveBuffer<(uint8_t)Nintendo64Controller::ResponseSize::PollSize>>;
+	using CommandCode = Nintendo64Controller::CommandCode;
+	using ResponseSize = Nintendo64Controller::ResponseSize;
+	using ResponseCode = Nintendo64Controller::ResponseCode;
 
 private:
 	CommandCode LastCommandSent = CommandCode::NoCommandCode;
@@ -37,7 +40,7 @@ public:
 	/// Can be called after ~1 ms of poll, if low latency is desired.
 	/// </summary>
 	/// <returns>True when a response was found.</returns>
-	const bool ReadControllerData(data_t& controllerData, const uint8_t maxReadTries = 50)
+	const bool ReadControllerData(Nintendo64Controller::data_t& controllerData, const uint8_t maxReadTries = 50)
 	{
 		if (GetResponse(maxReadTries))
 		{
@@ -48,7 +51,7 @@ public:
 	}
 
 private:
-	const bool ProcessResponse(data_t& controllerData)
+	const bool ProcessResponse(Nintendo64Controller::data_t& controllerData)
 	{
 		// Validate for size based on expected response.
 		switch (LastCommandSent)

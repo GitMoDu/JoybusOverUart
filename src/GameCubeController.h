@@ -17,8 +17,8 @@ namespace GameCubeController
 		Down = 10,
 		Up = 11,
 		Z = 12,
-		R = 13,
-		L = 14
+		R1 = 13,
+		L1 = 14
 	};
 
 	struct data_t
@@ -28,8 +28,8 @@ namespace GameCubeController
 		int8_t JoystickY;
 		int8_t JoystickCX;
 		int8_t JoystickCY;
-		uint8_t SliderLeft;
-		uint8_t SliderRight;
+		uint8_t L2;
+		uint8_t R2;
 
 		void Clear()
 		{
@@ -38,8 +38,8 @@ namespace GameCubeController
 			JoystickY = 0;
 			JoystickCX = 0;
 			JoystickCY = 0;
-			SliderLeft = 0;
-			SliderRight = 0;
+			L2 = 0;
+			R2 = 0;
 		}
 
 		template<const ButtonsEnum button>
@@ -66,8 +66,8 @@ namespace GameCubeController
 			JoystickY = source.JoystickY;
 			JoystickCX = source.JoystickCX;
 			JoystickCY = source.JoystickCY;
-			SliderLeft = source.SliderLeft;
-			SliderRight = source.SliderRight;
+			L2 = source.L2;
+			R2 = source.R2;
 			Connected = source.Connected;
 		}
 
@@ -78,8 +78,8 @@ namespace GameCubeController
 			JoystickY = 0;
 			JoystickCX = 0;
 			JoystickCY = 0;
-			SliderLeft = 0;
-			SliderRight = 0;
+			L2 = 0;
+			R2 = 0;
 			Connected = false;
 		}
 	};

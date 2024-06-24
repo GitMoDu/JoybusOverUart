@@ -145,7 +145,7 @@ public:
 			{
 				JoyBusGC.Poll();
 				ReadState = ReadStateEnum::PollRead;
-				Task::delay(1);
+				Task::delay(0);
 			}
 			break;
 		default:
