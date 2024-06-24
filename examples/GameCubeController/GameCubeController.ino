@@ -19,8 +19,11 @@
 #include <GameCubeOverUart.h>
 
 static constexpr uint32_t UpdatePeriodMillis = 100;
+static constexpr HardwareSerial* JoyBusSerial = &Serial3;
 
-GameCubeOverUart JoyBusReader(&Serial3);
+
+
+GameCubeOverUart JoyBusReader(JoyBusSerial);
 
 GameCubeController::data_t ControllerState{};
 bool Connected = false;

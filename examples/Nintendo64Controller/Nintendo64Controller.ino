@@ -19,8 +19,11 @@
 #include <Nintendo64OverUart.h>
 
 static constexpr uint32_t UpdatePeriodMillis = 100;
+static constexpr HardwareSerial* JoyBusSerial = &Serial3;
 
-Nintendo64OverUart JoyBusReader(&Serial3);
+
+
+Nintendo64OverUart JoyBusReader(JoyBusSerial);
 
 Nintendo64Controller::data_t ControllerState{};
 bool Connected = false;

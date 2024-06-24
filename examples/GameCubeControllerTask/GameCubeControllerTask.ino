@@ -41,6 +41,8 @@
 #include "GCControllerDrawer.h"
 #endif
 
+static constexpr uint32_t UpdatePeriodMicros = 5000;
+static constexpr HardwareSerial* JoyBusSerial = &Serial3;
 
 // Process scheduler.
 Scheduler SchedulerBase{};
@@ -50,9 +52,9 @@ GameCubeController::state_data_t ControllerState{};
 
 // Controller data updater.
 #if defined(USE_MOCK_CONTROLLER)
-MockControllerReadTask ReadTask(&SchedulerBase, ControllerState, 5000);
+MockControllerReadTask ReadTask(&SchedulerBase, ControllerState, UpdatePeriodMicros);
 #else
-GameCubeControllerReadTask ReadTask(&SchedulerBase, ControllerState, &Serial2, 5000);
+GameCubeControllerReadTask ReadTask(&SchedulerBase, ControllerState, JoyBusSerial, UpdatePeriodMicros);
 #endif
 
 // Serial log task.
