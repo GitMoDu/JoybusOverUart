@@ -7,8 +7,6 @@
 #include "JoybusUart/JoybusReceiveBuffer.h"
 #include "JoybusUart/JoybusUart.h"
 
-//using namespace Nintendo64Controller;
-
 class Nintendo64OverUart : public JoybusUart<JoybusReceiveBuffer<(uint8_t)Nintendo64Controller::ResponseSize::PollSize>>
 {
 private:

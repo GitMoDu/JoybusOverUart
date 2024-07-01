@@ -12,9 +12,6 @@
 
 #define SERIAL_BAUD_RATE 115200
 
-#define _TASK_OO_CALLBACKS
-#include <TaskScheduler.h>
-
 #include <Nintendo64Controller.h>
 #include <Nintendo64OverUart.h>
 
