@@ -117,7 +117,7 @@ public:
 
 		const uint16_t deltaLR = ((elapsed % SliderPeriod) * (2 * UINT8_MAX)) / (SliderPeriod - 1);
 
-		ControllerState.SliderRight = 0;
+		ControllerState.R2 = 0;
 		switch (Section)
 		{
 		case SectionEnum::ABXY:
@@ -130,11 +130,11 @@ public:
 		case SectionEnum::Sliders:
 			if (deltaLR <= UINT8_MAX)
 			{
-				ControllerState.SliderRight = deltaLR;
+				ControllerState.R2 = deltaLR;
 			}
 			else
 			{
-				ControllerState.SliderRight = UINT8_MAX - deltaLR;
+				ControllerState.R2 = UINT8_MAX - deltaLR;
 			}
 			break;
 		case SectionEnum::StartZ:
@@ -144,8 +144,8 @@ public:
 			break;
 		case SectionEnum::LR:
 			ControllerState.Connected = true;
-			ControllerState.Buttons = (a | c) * ControllerState.Mask<ButtonsEnum::L>();
-			ControllerState.Buttons |= (b | d) * ControllerState.Mask<ButtonsEnum::R>();
+			ControllerState.Buttons = (a | c) * ControllerState.Mask<ButtonsEnum::L1>();
+			ControllerState.Buttons |= (b | d) * ControllerState.Mask<ButtonsEnum::R1>();
 			break;
 		case SectionEnum::DPad:
 			ControllerState.Connected = true;
@@ -161,7 +161,7 @@ public:
 			break;
 		}
 
-		ControllerState.SliderLeft = ControllerState.SliderRight;
+		ControllerState.L2 = ControllerState.R2;
 
 		return true;
 	}
