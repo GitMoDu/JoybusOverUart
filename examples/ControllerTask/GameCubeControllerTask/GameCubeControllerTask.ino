@@ -15,11 +15,11 @@
 #define SERIAL_BAUD_RATE 115200
 
 // Enable to skip Nintendo64 controller and just show a demo of the output.
-#define USE_MOCK_CONTROLLER
+//#define USE_MOCK_CONTROLLER
 
 // Enable to use ArduinoGraphicsEngine for displaying live link info.
 // Depends on https://github.com/GitMoDu/ArduinoGraphicsEngine
-//#define USE_CONTROLLER_DISPLAY
+#define USE_CONTROLLER_DISPLAY
 //#define GRAPHICS_ENGINE_MEASURE
 
 #define _TASK_OO_CALLBACKS
