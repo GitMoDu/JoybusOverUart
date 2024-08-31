@@ -155,6 +155,7 @@ public:
 		return true;
 	}
 
+private:
 	const bool Synchronize()
 	{
 		const uint32_t elapsed = micros() - LastRead;
