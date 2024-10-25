@@ -1,5 +1,6 @@
 ## JoybusOverUart
-Arduino compatible, C++ library to Read/Write to Joybus protocol devices (N64, GameCube controllers) over UART in a non-blocking way (no bit bang). Interrupts aren't blocked or used.
+Arduino compatible, C++ library to Read/Write to Joybus protocol devices (N64, GameCube controllers) over UART in a non-blocking way (no bit bang).
+Works with any UART capable of 1250000bps. Interrupts aren't blocked or used.
 
 (Ab)uses Serial Port to emulate the OneWire-like protocol of Joybus, based on the work published by qwertymodo (http://www.qwertymodo.com/hardware-projects/n64/n64-controller).
 
